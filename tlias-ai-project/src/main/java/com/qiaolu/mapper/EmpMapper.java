@@ -1,7 +1,6 @@
 package com.qiaolu.mapper;
 
 import com.qiaolu.pojo.Emp;
-import com.qiaolu.pojo.EmpExpr;
 import com.qiaolu.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,5 +29,9 @@ public interface EmpMapper {
     @Insert("insert into emp (username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) " +
             "values (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
     void saveEmp(Emp emp);
+
+
+    @Select("select id, username, password, name, gender, job, salary, image, entry_date, dept_id, create_time, update_time from emp")
+    List<Emp> findAll();
 }
 

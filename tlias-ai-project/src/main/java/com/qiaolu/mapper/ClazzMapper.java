@@ -2,10 +2,7 @@ package com.qiaolu.mapper;
 
 import com.qiaolu.pojo.Clazz;
 import com.qiaolu.pojo.ClazzQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -25,10 +22,25 @@ public interface ClazzMapper {
     void addClazz(Clazz clazz);
 
     /**
-     * 该接口用于查询所有班级信息
+     * 根据id删除班级
+     * @param id
      */
-    List<Clazz> findAll();
+    @Delete("delete from clazz where id = #{id}")
+    void deleteById(Integer id);
 
+    /**
+     * 根据id查询班级
+     * @param id
+     * @return
+     */
+    @Select("select id, name, room, begin_date, end_date, master_id, subject, create_time, update_time from  clazz where id = #{id}")
+    Clazz getById(Integer id);
+
+    /**
+     * 修改班级
+     * @param clazz
+     */
+    void update(Clazz clazz);
 }
 
 

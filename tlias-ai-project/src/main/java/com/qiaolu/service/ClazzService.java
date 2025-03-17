@@ -3,10 +3,6 @@ package com.qiaolu.service;
 import com.qiaolu.pojo.Clazz;
 import com.qiaolu.pojo.ClazzQueryParam;
 import com.qiaolu.pojo.PageResult;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
 
 public interface ClazzService {
     /**
@@ -20,9 +16,9 @@ public interface ClazzService {
      */
     void addClazz(Clazz clazz);
 
-    /**
-     * 该接口用于查询所有班级信息
-     * @return
-     */
-    List<Clazz> findAll();
+    void deleteById(Integer id);
+
+    Clazz getById(Integer id);
+
+    void update(Clazz clazz);
 }

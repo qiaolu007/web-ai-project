@@ -6,11 +6,9 @@ import com.qiaolu.pojo.PageResult;
 import com.qiaolu.pojo.Result;
 import com.qiaolu.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Slf4j
 @RequestMapping("/clazzs")
@@ -19,7 +17,6 @@ public class ClazzController {
 
     @Autowired
     private ClazzService clazzService;
-    // 复杂参数接收方式一--@RequestParam
 
     /**
      * 该接口用于班级列表数据的条件分页查询
@@ -33,10 +30,8 @@ public class ClazzController {
 
     /**
      * 添加班级
-     * @param clazz
-     * @return
      */
-    @PostMapping("/clazzs")
+    @PostMapping
     public Result addClazz(@RequestBody Clazz clazz) {
         log.info("班级信息:" + clazz);
         clazzService.addClazz(clazz);
@@ -44,13 +39,33 @@ public class ClazzController {
     }
 
     /**
-     * 该接口用于查询所有班级信息
+     * 删除{id}班级,路径参数需要加上@PathVariable
+     * @param id
      * @return
      */
-    @GetMapping("/list")
-    public Result findAll() {
-        List<Clazz> list = clazzService.findAll();
-        log.info("所有班级://n" + list.toString());
-        return Result.success(list);
+    @DeleteMapping("/{id}")
+    public Result deleteById(@PathVariable Integer id) {
+        log.info("删除id为:{}",id);
+        clazzService.deleteById(id);
+        return Result.success();
     }
+
+    /**
+     * 根据ID查询班级
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        Clazz clazz = clazzService.getById(id);
+        return Result.success(clazz);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Clazz clazz) {
+        clazzService.update(clazz);
+        return Result.success();
+    }
+
+
 }

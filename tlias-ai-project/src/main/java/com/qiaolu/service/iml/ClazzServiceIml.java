@@ -7,14 +7,11 @@ import com.qiaolu.pojo.Clazz;
 import com.qiaolu.pojo.ClazzQueryParam;
 import com.qiaolu.pojo.PageResult;
 import com.qiaolu.service.ClazzService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class ClazzServiceIml implements ClazzService {
@@ -46,12 +43,24 @@ public class ClazzServiceIml implements ClazzService {
     public void addClazz(Clazz clazz) {
         clazz.setCreateTime(LocalDateTime.now());
         clazz.setUpdateTime(LocalDateTime.now());
+
         clazzMapper.addClazz(clazz);
     }
 
     @Override
-    public List<Clazz> findAll() {
-        List<Clazz> list = clazzMapper.findAll();
-        return list;
+    public void deleteById(Integer id) {
+        clazzMapper.deleteById(id);
     }
+
+    @Override
+    public Clazz getById(Integer id) {
+        Clazz clazz = clazzMapper.getById(id);
+        return clazz;
+    }
+
+    @Override
+    public void update(Clazz clazz) {
+        clazzMapper.update(clazz);
+    }
+
 }

@@ -32,6 +32,12 @@ public class UploadController {
     @Autowired
     private AliyunOSSOperator aliyunOSSOperator;
 
+    /**
+     *
+     * @param file
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/upload")
     public Result uploadFile(MultipartFile file) throws Exception {
         String upload = aliyunOSSOperator.upload(file.getBytes(), file.getOriginalFilename());

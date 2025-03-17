@@ -81,4 +81,10 @@ public class EmpServiceIml implements EmpService {
             empLogMapper.insert(empLog);
         }
     }
+
+    @Override
+    public List<Emp> findAll() {
+        List<Emp> list = empMapper.findAll();
+        return list;
+    }
 }
