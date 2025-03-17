@@ -13,7 +13,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="D:/Program Files/develop/mvn_repo/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="D:/Program Files/develop/mvn_repo/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="tlias-ai-project" />
