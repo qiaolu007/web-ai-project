@@ -36,8 +36,6 @@ public class EmpController {
 
     /**
      * 员工条件分页查询
-     * @param empQueryParam
-     * @return
      */
     @GetMapping
     public Result page(EmpQueryParam empQueryParam) {
@@ -48,9 +46,6 @@ public class EmpController {
 
     /**
      * 新增员工(基本信息与工作经历)
-     * @param emp
-     * @return
-     * @throws Exception
      */
     @PostMapping
     public Result saveEmp(@RequestBody Emp emp) throws Exception {
@@ -61,13 +56,42 @@ public class EmpController {
 
     /**
      * 查询所有员工
-     * @return
      */
     @GetMapping("/list")
     public Result findAll() {
         log.info("查询所有员工");
         List<Emp> list = empService.findAll();
         return Result.success(list);
+    }
+
+    /**
+     * 批量删除员工
+     */
+    @DeleteMapping()
+    public Result deletByIds(@RequestParam List<Integer> ids) {
+        log.info("批量删除员工:{}", ids);
+        empService.deleteByIds(ids);
+        return Result.success();
+    }
+
+    /**
+     *根据id查询员工信息
+     */
+    @GetMapping("{id}")
+    public Result getInfoById(@PathVariable Integer id) {
+        log.info("查询员工:{}", id);
+        Emp emp = empService.getInfoById(id);
+        return Result.success(emp);
+    }
+
+    /**
+     *更新员工信息
+     */
+    @PutMapping
+    public Result updateEmp(@RequestBody Emp emp) {
+        log.info("修改员工信息:{}", emp);
+        empService.updateEmp(emp);
+        return Result.success();
     }
 
 }

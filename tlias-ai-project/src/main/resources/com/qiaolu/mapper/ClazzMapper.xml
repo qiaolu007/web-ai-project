@@ -29,5 +29,11 @@
             </if>
         </where>
     </select>
+    <select id="findAll" resultType="com.qiaolu.pojo.Clazz">
+        select id, name, room, begin_date, end_date, master_id, subject, create_time, update_time from clazz;
+    </select>
+    <select id="studentCountData" resultType="map">
+        select c.name , count(*) num from clazz c left join student s on  c.id = s.clazz_id group by c.name;
+    </select>
 
 </mapper>

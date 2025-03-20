@@ -15,7 +15,7 @@ public interface DeptService {
      * 根据id删除部门
      * @param id
      */
-    void deleteById(Integer id);
+    void deleteById(Integer id) throws Exception;
 
     /**
      * 根据id添加部门

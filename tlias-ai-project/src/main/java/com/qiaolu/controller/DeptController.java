@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-
 @RestController
 public class DeptController {
 
@@ -56,8 +55,8 @@ public class DeptController {
      * @param id 条件id
      */
     @DeleteMapping("/depts")
-    public Result delete(Integer id) {
-
+    public Result delete(Integer id) throws Exception {
+        log.info("删除部门:{}", id);
         deptService.deleteById(id);
         return Result.success();
     }
@@ -69,6 +68,7 @@ public class DeptController {
      */
     @PostMapping("/depts")
     public Result add(@RequestBody Dept dept) {
+        log.info("新增部门:{}", dept);
         deptService.add(dept);
         return Result.success();
     }

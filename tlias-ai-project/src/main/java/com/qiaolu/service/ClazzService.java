@@ -3,6 +3,9 @@ package com.qiaolu.service;
 import com.qiaolu.pojo.Clazz;
 import com.qiaolu.pojo.ClazzQueryParam;
 import com.qiaolu.pojo.PageResult;
+import com.qiaolu.pojo.ReportStudentData;
+
+import java.util.List;
 
 public interface ClazzService {
     /**
@@ -21,4 +24,16 @@ public interface ClazzService {
     Clazz getById(Integer id);
 
     void update(Clazz clazz);
+
+    /**
+     * 查询所有班级
+     *
+     * @return
+     */
+    List<Clazz> findAll();
+
+    /**
+     * 班级人数统计
+     */
+    ReportStudentData studentCountData();
 }

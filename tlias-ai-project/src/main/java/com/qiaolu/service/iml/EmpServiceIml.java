@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class EmpServiceIml implements EmpService {
@@ -86,5 +89,53 @@ public class EmpServiceIml implements EmpService {
     public List<Emp> findAll() {
         List<Emp> list = empMapper.findAll();
         return list;
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void deleteByIds(List<Integer> ids) {
+        empMapper.deleteByIds(ids);
+        empExprMapper.deleteByIds(ids);
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void updateEmp(Emp emp) {
+        // 根据id修改员工基本信息
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateEmpById(emp);
+        // 根据id删除员工工作经历信息
+        Integer id = emp.getId();
+        empExprMapper.deleteByIds(Arrays.asList(id));
+        // 根据id添加员工工作经历信息
+        List<EmpExpr> empExprs = emp.getExprList();
+        if (!CollectionUtils.isEmpty(empExprs)) {
+            empExprs.forEach(empExpr -> {
+                empExpr.setEmpId(id);
+                System.out.println("更改的emp_id:" + id);
+                ;
+            });
+            empExprMapper.savaEmpExpr(emp.getExprList());
+        }
+
+    }
+
+    @Override
+    public Emp getInfoById(Integer id) {
+        return empMapper.getInfoById(id);
+    }
+
+    @Override
+    public ReportEmpJobData getEmpJobData() {
+        List<Map<String, Object>> list = empMapper.getEmpJobData();
+        ReportEmpJobData reportEmpJobData = new ReportEmpJobData();
+        reportEmpJobData.setJobList((list.stream().map(dataMap -> (String) dataMap.get("job")).toList()));
+        reportEmpJobData.setDataList(list.stream().map(dataMap -> (Long) dataMap.get("num")).toList());
+        return reportEmpJobData;
+    }
+
+    @Override
+    public List<Map<String, Object>> getEmpGenderData() {
+        return empMapper.getEmpGenderData();
     }
 }

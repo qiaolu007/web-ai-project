@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequestMapping("/clazzs")
 @RestController
@@ -24,7 +26,7 @@ public class ClazzController {
     @GetMapping
     public Result pagingQuery(ClazzQueryParam clazzQueryParam) {
         log.info("name = {}", clazzQueryParam);
-        PageResult<Clazz> pageResult= clazzService.pagingQuery(clazzQueryParam);
+        PageResult<Clazz> pageResult = clazzService.pagingQuery(clazzQueryParam);
         return Result.success(pageResult);
     }
 
@@ -40,18 +42,20 @@ public class ClazzController {
 
     /**
      * 删除{id}班级,路径参数需要加上@PathVariable
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        log.info("删除id为:{}",id);
+        log.info("删除id为:{}", id);
         clazzService.deleteById(id);
         return Result.success();
     }
 
     /**
      * 根据ID查询班级
+     *
      * @param id
      * @return
      */
@@ -61,11 +65,25 @@ public class ClazzController {
         return Result.success(clazz);
     }
 
+    /**
+     * 更改班级信息
+     *
+     * @param clazz
+     * @return
+     */
     @PutMapping
     public Result update(@RequestBody Clazz clazz) {
         clazzService.update(clazz);
         return Result.success();
     }
 
-
+    /**
+     * 查询所有班级
+     */
+    @GetMapping("/list")
+    public Result findAll() {
+        log.info("查询所有班级~");
+        List<Clazz> list = clazzService.findAll();
+        return Result.success(list);
+    }
 }
