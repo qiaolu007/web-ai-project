@@ -1,9 +1,6 @@
 package com.qiaolu.service;
 
-import com.qiaolu.pojo.Emp;
-import com.qiaolu.pojo.EmpQueryParam;
-import com.qiaolu.pojo.PageResult;
-import com.qiaolu.pojo.ReportEmpJobData;
+import com.qiaolu.pojo.*;
 
 import java.util.List;
 import java.util.Map;
@@ -56,4 +53,11 @@ public interface EmpService {
      * @return
      */
     List<Map<String, Object>> getEmpGenderData();
+
+    /**
+     * 登录
+     * @param emp
+     * @return
+     */
+    LoginInfo login(Emp emp);
 }

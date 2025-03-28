@@ -7,6 +7,9 @@ import com.qiaolu.mapper.EmpLogMapper;
 import com.qiaolu.mapper.EmpMapper;
 import com.qiaolu.pojo.*;
 import com.qiaolu.service.EmpService;
+import com.qiaolu.utils.JwtUtil;
+import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +17,11 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
+@Slf4j
 @Service
 public class EmpServiceIml implements EmpService {
     // ---------- 原始方法 -------------
@@ -137,5 +141,19 @@ public class EmpServiceIml implements EmpService {
     @Override
     public List<Map<String, Object>> getEmpGenderData() {
         return empMapper.getEmpGenderData();
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp empInfo = empMapper.getUsernameAndPassword(emp);
+        Map<String, Object> map = new HashMap<>();
+
+        if (empInfo != null) {
+            map.put("id", empInfo.getId());
+            map.put("name", empInfo.getName());
+            String token = JwtUtil.generateToken(map);
+            return new LoginInfo(empInfo.getId(), empInfo.getUsername(), empInfo.getName(), token);
+        }
+        return null;
     }
 }

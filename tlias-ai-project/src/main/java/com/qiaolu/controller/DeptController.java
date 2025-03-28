@@ -1,5 +1,6 @@
 package com.qiaolu.controller;
 
+import com.qiaolu.anno.Log;
 import com.qiaolu.pojo.Dept;
 import com.qiaolu.pojo.Result;
 import com.qiaolu.service.DeptService;
@@ -54,6 +55,7 @@ public class DeptController {
      * 根据id删除部门
      * @param id 条件id
      */
+    @Log
     @DeleteMapping("/depts")
     public Result delete(Integer id) throws Exception {
         log.info("删除部门:{}", id);
@@ -66,6 +68,7 @@ public class DeptController {
      * josn 数据的处理-通过实体对象来接收,保证json格式的键名与对象属性名保持一致,并添加@RequestBody注解
      * 使用场景,主要在post和put请求中
      */
+    @Log
     @PostMapping("/depts")
     public Result add(@RequestBody Dept dept) {
         log.info("新增部门:{}", dept);
@@ -88,6 +91,7 @@ public class DeptController {
     /**
      * 更改部门信息
      */
+    @Log
     @PutMapping("depts")
     public Result updateInfo(@RequestBody Dept dept) {
         System.out.println("修改部门:" + dept);

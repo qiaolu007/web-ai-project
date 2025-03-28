@@ -1,5 +1,6 @@
 package com.qiaolu.controller;
 
+import com.qiaolu.anno.Log;
 import com.qiaolu.pojo.PageResult;
 import com.qiaolu.pojo.Result;
 import com.qiaolu.pojo.Student;
@@ -38,6 +39,7 @@ public class StudentController {
      * @param student
      * @return
      */
+    @Log
     @PostMapping
     public Result saveStudent(@RequestBody Student student) {
         log.info("新增学员:{}", student);
@@ -60,6 +62,7 @@ public class StudentController {
     /**
      * 修改学生基本信息
      */
+    @Log
     @PutMapping
     public Result updateInfo(@RequestBody Student student) {
         log.info("更新学生信息:{}", student);
@@ -70,6 +73,7 @@ public class StudentController {
     /**
      * 删除学生
      */
+    @Log
     @DeleteMapping("/{ids}")
     public Result deleteStudent(@PathVariable List<Integer> ids) {
         log.info("删除学生:{}", ids);

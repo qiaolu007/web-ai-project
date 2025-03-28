@@ -2,6 +2,7 @@ package com.qiaolu.mapper;
 
 import com.qiaolu.pojo.Emp;
 import com.qiaolu.pojo.EmpQueryParam;
+import com.qiaolu.pojo.LoginInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -67,5 +68,8 @@ public interface EmpMapper {
      * 根据部门id查询员工数量
      */
     Integer getNumByDeptID(Integer deptId);
+
+    @Select("select id, username, name from emp where username = #{username} and password = #{password}")
+    Emp getUsernameAndPassword(Emp emp);
 }
 

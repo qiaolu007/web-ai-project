@@ -1,5 +1,6 @@
 package com.qiaolu.controller;
 
+import com.qiaolu.anno.Log;
 import com.qiaolu.pojo.Clazz;
 import com.qiaolu.pojo.ClazzQueryParam;
 import com.qiaolu.pojo.PageResult;
@@ -33,6 +34,7 @@ public class ClazzController {
     /**
      * 添加班级
      */
+    @Log
     @PostMapping
     public Result addClazz(@RequestBody Clazz clazz) {
         log.info("班级信息:" + clazz);
@@ -46,6 +48,7 @@ public class ClazzController {
      * @param id
      * @return
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result deleteById(@PathVariable Integer id) {
         log.info("删除id为:{}", id);
@@ -71,6 +74,7 @@ public class ClazzController {
      * @param clazz
      * @return
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Clazz clazz) {
         clazzService.update(clazz);

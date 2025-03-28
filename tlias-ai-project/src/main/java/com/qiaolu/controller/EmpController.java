@@ -1,5 +1,6 @@
 package com.qiaolu.controller;
 
+import com.qiaolu.anno.Log;
 import com.qiaolu.pojo.Emp;
 import com.qiaolu.pojo.EmpQueryParam;
 import com.qiaolu.pojo.PageResult;
@@ -47,6 +48,7 @@ public class EmpController {
     /**
      * 新增员工(基本信息与工作经历)
      */
+    @Log
     @PostMapping
     public Result saveEmp(@RequestBody Emp emp) throws Exception {
         log.info("请求参数: {}", emp);
@@ -67,6 +69,7 @@ public class EmpController {
     /**
      * 批量删除员工
      */
+    @Log
     @DeleteMapping()
     public Result deletByIds(@RequestParam List<Integer> ids) {
         log.info("批量删除员工:{}", ids);
@@ -87,6 +90,7 @@ public class EmpController {
     /**
      *更新员工信息
      */
+    @Log
     @PutMapping
     public Result updateEmp(@RequestBody Emp emp) {
         log.info("修改员工信息:{}", emp);
