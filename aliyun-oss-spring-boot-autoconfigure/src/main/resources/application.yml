@@ -1,0 +1,7 @@
+
+#阿里云对象存储oss属性配置
+aliyun:
+  oss:
+    endPoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: qiaolu-java-ai
+    region: cn-beijing
